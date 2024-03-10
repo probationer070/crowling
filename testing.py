@@ -9,7 +9,7 @@ class Test:
     def __init__(self, keyword):
         self.keyword = keyword 
 
-    @staticmethod
+    # @staticmethod
     def loading_animation(response, option="cli_ver_simple_bar"):
         
         if option == "cli_ver_simple_bar":

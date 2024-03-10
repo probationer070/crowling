@@ -19,12 +19,16 @@ def crawl_the_data(keyword, num_stated=10):
         print("[+] Access Granted \n")
         # print(response.text) # 전체 스크립트 출력
         
-        soup = BeautifulSoup(response.text, 'lxml') # XML 파일이라고 생각해서 했는데 왜 자꾸 경고문이 뜨는지 모르겠음 ?
+        soup = BeautifulSoup(response.text, 'xml') 
         
         news_list = soup.find_all('item')[:num_stated]
                 
         for index, news in enumerate(news_list, start=1):
-            upload_time = news.find('pubdate').text
+            try:
+                upload_time = news.find('pubdate').text
+            except AttributeError:
+                upload_time = "Unknown"
+            
             news_title = news.find('title').text
             print(f"{index}. {news_title} : Upoladed time [{upload_time}] ")
 
