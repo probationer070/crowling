@@ -20,7 +20,7 @@ def crawl_google_news(search_query, num_results=5):
         # 검색 결과 페이지 URL 출력
         search_result_url = driver.current_url
         print(f"검색 결과 페이지 URL: {search_result_url}")
-        search_result_url = search_result_url + "&tbm=nws"
+        search_result_url = search_result_url + "&tbm=nws" # 추후 변경 예정
 
         # 검색 결과 스크랩
         # results = WebDriverWait(driver, 10).until(
@@ -30,17 +30,20 @@ def crawl_google_news(search_query, num_results=5):
         results = driver.find_elements(By.XPATH, '//*[@id="rso"]')
 
         for index, result in enumerate(results[:num_results], start=1):
-            # 사이트 제목
-            title = result.find_element(By.CSS_SELECTOR, '#rso > div:nth-child(1) > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > div > div > div > span').text
+            print(f"New total n : {len(results)}")
+            if result == None:
+                result = "_Blank_"
+                # 사이트 제목
+            title = result.find_element(By.CSS_SELECTOR, f'#rso > div:nth-child({index}) > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > div > div > div > span').text
 
             # # 사이트 출처
-            source = result.find_element(By.CSS_SELECTOR, '#rso > div:nth-child(1) > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > div > div > div > div > cite').text
+            source = result.find_element(By.CSS_SELECTOR, f'#rso > div:nth-child({index}) > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > div > div > div > div > cite').text
 
             # # 사이트 내용 (텍스트만 추출)
-            content = result.find_element(By.CSS_SELECTOR, '#rso > div:nth-child(1) > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > h3').text
+            content = result.find_element(By.CSS_SELECTOR, f'#rso > div:nth-child({index}) > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > h3').text
 
             # # 업로드된 시간
-            upload_time = result.find_element(By.CSS_SELECTOR, '#rso > div:nth-child(1) > div > div > div:nth-child(2) > div > span').text
+            upload_time = result.find_element(By.CSS_SELECTOR, f'#rso > div:nth-child({index}) > div > div > div:nth-child(2) > div > span').text
 
             # 결과 출력
             print(f"\n[ Site {index} ]")
@@ -53,8 +56,13 @@ def crawl_google_news(search_query, num_results=5):
 
 
 #rso > div:nth-child(1) > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > div > div > div > span : 사이트 이름
+#rso > div:nth-child(2) > div > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > div > div > div > span
 
 #rso > div:nth-child(1) > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > div > div > div > div > cite : 사이트 URL
+
+#rso > div:nth-child(2) > div > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > div > div > div > div > cite
+#rso > div:nth-child(5) > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > div > div > div > div > cite
+#rso > div:nth-child(6) > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > div > div > div > div > cite
 
 #rso > div:nth-child(1) > div > div > div.kb0PBd.cvP2Ce.jGGQ5e > div > div > span > a > h3 :  뉴스 제목
 

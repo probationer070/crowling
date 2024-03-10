@@ -28,7 +28,7 @@ class StockRankCron():
             'changeType': 'RISE',
             'pagination': 'true',
             'order': 'desc'
-          }
+        }
 
         headers = {
             'referer': 'https://finance.daum.net',
