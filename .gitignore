@@ -1,0 +1,6 @@
+## ignore unnecessary file
+
+python_data_analysis/
+
+*.db
+*.sqllite3
