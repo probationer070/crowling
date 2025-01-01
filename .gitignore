@@ -1,6 +1,9 @@
 ## ignore unnecessary file
 
 python_data_analysis/
+source
+node_modules/
+__pycache__/
 
 *.db
 *.sqllite3
